@@ -16,6 +16,9 @@ jobs:
         with:
           java-version: 11
 
+      - name: Give execute permission to gradlew
+        run: chmod +x ./gradlew
+
       - name: Build WasmJsBrowserDistribution
         run: ./gradlew wasmJsBrowserDistribution
 
