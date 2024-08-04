@@ -2,11 +2,13 @@ package ui.screen.home
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.TextFieldValue
+import kotlinx.browser.window
 import model.SvgData
 import ui.theme.BaseVector
 
@@ -24,11 +26,14 @@ class HomeController(
     var unknownColors by mutableStateOf(emptySet<String>())
     var iconName by mutableStateOf(TextFieldValue("untitled"))
     var blur by mutableStateOf(0.0F)
+    var windowWidth = mutableStateOf(window.innerWidth)
 
     val convertOptions = listOf(
         ConvertOptions.DrawablePath,
         ConvertOptions.SvgPath
     )
+
+    fun isSmallWindow() = windowWidth.value < 650
 
     fun clearValues(index: Int) {
         pathDecomposed = ""

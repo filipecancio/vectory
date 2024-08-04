@@ -27,11 +27,9 @@ import ui.theme.getBaseType
 fun HomeScreen(
     controller: HomeController
 ) {
-    val windowWidth = remember { mutableStateOf(window.innerWidth) } // Initialize with current width
-
     LaunchedEffect(Unit) {
         window.addEventListener("resize") {
-            windowWidth.value = window.innerWidth
+            controller.windowWidth.value = window.innerWidth
         }
     }
     MaterialTheme {
@@ -54,7 +52,7 @@ fun HomeScreen(
                     )
                 }
             }
-            if (windowWidth.value < 650 ){
+            if (controller.isSmallWindow() ){
                 Column(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
@@ -70,7 +68,8 @@ fun HomeScreen(
                         CodeEdit(
                             value = controller.textFieldValue,
                             onValueChange = { controller.textFieldValue = it },
-                            isDark = controller.isDark
+                            isDark = controller.isDark,
+                            isSmallSize = controller.isSmallWindow()
                         )
                         ActionButton(
                             text = "Convert",
@@ -91,7 +90,8 @@ fun HomeScreen(
                             value = TextFieldValue(controller.imageVectorCode),
                             selected = true,
                             onValueChange = { },
-                            isDark = controller.isDark
+                            isDark = controller.isDark,
+                            isSmallSize = controller.isSmallWindow()
                         )
                         ActionBar(
                             buttonText = "Copy",
@@ -119,7 +119,8 @@ fun HomeScreen(
                         CodeEdit(
                             value = controller.textFieldValue,
                             onValueChange = { controller.textFieldValue = it },
-                            isDark = controller.isDark
+                            isDark = controller.isDark,
+                            isSmallSize = controller.isSmallWindow()
                         )
                         ActionButton(
                             text = "Convert",
@@ -140,7 +141,8 @@ fun HomeScreen(
                             value = TextFieldValue(controller.imageVectorCode),
                             selected = true,
                             onValueChange = { },
-                            isDark = controller.isDark
+                            isDark = controller.isDark,
+                            isSmallSize = controller.isSmallWindow()
                         )
                         ActionBar(
                             buttonText = "Copy",

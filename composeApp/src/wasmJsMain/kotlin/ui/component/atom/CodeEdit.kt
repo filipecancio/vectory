@@ -1,6 +1,8 @@
 package ui.component.atom
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,7 +24,8 @@ fun CodeEdit(
     selected: Boolean = false,
     textStyle: TextStyle = if(selected){ getBaseType(isDark).body2 }else{
         getBaseType(isDark).body1},
-    modifier: Modifier = defaultModifier(isDark,selected)
+    isSmallSize: Boolean = false,
+    modifier: Modifier = if(isSmallSize)  expandedModifier(isDark,selected) else defaultModifier(isDark,selected)
 ) = BasicTextField(
     value = value,
     onValueChange = onValueChange,
@@ -30,11 +33,19 @@ fun CodeEdit(
     textStyle = textStyle
 )
 
-private fun defaultModifier(isDark: Boolean,selected: Boolean = false) = Modifier
+fun defaultModifier(isDark: Boolean,selected: Boolean = false) = Modifier
     .size(
         width = 300.dp,
         height = 100.dp
     )
+    .clip(RoundedCornerShape(10.dp))
+    .background(if(selected){ BaseColor.Blue01.toColor(isDark) }else{ BaseColor.Secondary.toColor(isDark) })
+    .padding(16.dp)
+
+fun expandedModifier(isDark: Boolean,selected: Boolean = false) = Modifier
+    .padding(16.dp)
+    .fillMaxWidth()
+    .height(100.dp)
     .clip(RoundedCornerShape(10.dp))
     .background(if(selected){ BaseColor.Blue01.toColor(isDark) }else{ BaseColor.Secondary.toColor(isDark) })
     .padding(16.dp)
