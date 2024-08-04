@@ -27,10 +27,12 @@ import ui.theme.getBaseType
 fun HomeScreen(
     controller: HomeController
 ) {
-    val windowWidth = remember { mutableStateOf(0) }
+    val windowWidth = remember { mutableStateOf(window.innerWidth) } // Initialize with current width
 
     LaunchedEffect(Unit) {
-        windowWidth.value = window.innerWidth
+        window.addEventListener("resize") {
+            windowWidth.value = window.innerWidth
+        }
     }
     MaterialTheme {
         Column(
