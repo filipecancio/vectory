@@ -11,6 +11,10 @@ jobs:
     permissions:
       id-token: write
       contents: write
+      pages: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -34,6 +38,6 @@ jobs:
       - name: Deploy artifact
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: 'build/wasmJsBrowserDistribution'
+          artifact_name: 'composeApp/build/dist/wasmJs/productionExecutable'
           folder: 'composeApp/build/dist/wasmJs/productionExecutable'
           publish_dir: '.'
