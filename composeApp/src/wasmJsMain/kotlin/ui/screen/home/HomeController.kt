@@ -43,6 +43,20 @@ class HomeController(
         clipboardManager.setText(AnnotatedString(imageVectorCode))
     }
 
+    fun generateSvgData() {
+        svgData = null
+        //svgData = buildSvgData() ?: return
+        //updateImageVectorCode()
+    }
+
+    fun replaceImageVectorCode(newName: TextFieldValue) {
+        iconName = newName
+        if(svgData != null){
+            //updateImageVectorCode()
+        }
+    }
+
+
     enum class ConvertOptions(
         val label: String,
         val placeholder: String,
